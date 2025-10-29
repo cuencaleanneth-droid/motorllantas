@@ -19,7 +19,10 @@ import Offers from './pages/Offers';
 import Tires from './pages/Tires';
 import Contact from './pages/Contact';
 import Installation from './pages/Installation';
+import ShoppingCart from './pages/ShoppingCart';
+import Checkout from './pages/Checkout';
 import Footer from './components/Footer';
+import { useCart } from './context/CartContext';
 
 const Home = () => (
   <>
@@ -41,6 +44,9 @@ const Home = () => (
 );
 
 function App() {
+  const { cartItems } = useCart();
+  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
     <Router>
       <div className="App">
@@ -57,7 +63,10 @@ function App() {
           </nav>
           <div className="header-icons">
             <img src={perfilIcon} alt="perfil" />
-            <img src={compraIcon} alt="compra" />
+            <Link to="/cart" className="cart-icon">
+              <img src={compraIcon} alt="compra" />
+              {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
+            </Link>
           </div>
         </header>
         <div className="main-content">
@@ -67,6 +76,8 @@ function App() {
             <Route path="/tires" element={<Tires />} />
             <Route path="/installation" element={<Installation />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/cart" element={<ShoppingCart />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </div>
         <Footer />

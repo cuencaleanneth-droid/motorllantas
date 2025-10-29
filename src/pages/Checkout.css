@@ -1,0 +1,108 @@
+.checkout {
+    padding: 2rem;
+    background-color: #f8f8f8;
+  }
+  
+  .checkout-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+  
+  .billing-details, .order-summary {
+    background-color: #fff;
+    padding: 2rem;
+    border: 1px solid #ddd;
+  }
+  
+  .billing-details {
+    width: 60%;
+  }
+  
+  .order-summary {
+    width: 35%;
+  }
+  
+  .billing-details h2, .order-summary h2 {
+    margin-top: 0;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+  }
+  
+  .form-group-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .form-group-checkbox input {
+    margin-right: 0.5rem;
+  }
+  
+  .cart-summary {
+    margin-bottom: 2rem;
+  }
+  
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .summary-row.product-header {
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+  }
+  
+  .summary-row.total {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .payment-option {
+    margin-bottom: 1rem;
+  }
+  
+  .payment-option p {
+    font-size: 0.9rem;
+    color: #666;
+    background-color: #f2f2f2;
+    padding: 10px;
+  }
+  
+  .privacy-policy {
+    font-size: 0.8rem;
+    color: #666;
+  }
+  
+  .checkout-button {
+    background-color: #ff0;
+    color: #000;
+    border: none;
+    padding: 1rem;
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 1rem;
+  }
+  

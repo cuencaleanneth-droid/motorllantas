@@ -1,0 +1,131 @@
+.shopping-cart {
+    padding: 2rem;
+    background-color: #f8f8f8;
+  }
+  
+  .cart-container {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .cart-items {
+    flex-grow: 1;
+  }
+  
+  .cart-item-header {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    padding: 1rem 0;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+    text-align: center;
+  }
+  .cart-item-header span:first-child{
+    text-align: left;
+  }
+  
+  .cart-item {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  .product-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .product-info img {
+    width: 80px;
+    height: 80px;
+    margin-right: 1rem;
+  }
+  
+  .remove-item {
+    background: none;
+    border: 1px solid #ddd;
+    color: #ddd;
+    cursor: pointer;
+    margin-right: 1rem;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    line-height: 20px;
+    text-align: center;
+  }
+  
+  .quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .quantity button {
+    background: none;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .quantity span {
+    padding: 0 1rem;
+  }
+  
+  .subtotal, .price {
+    font-weight: bold;
+  }
+  
+  .cart-summary {
+    background-color: #fff;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    width: 350px;
+    height: fit-content;
+  }
+  
+  .cart-summary h2 {
+    margin-top: 0;
+  }
+  
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .summary-row.total {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .summary-row span:last-child {
+    font-weight: bold;
+  }
+  .summary-row div {
+    text-align: right;
+  }
+  .summary-row div p {
+    font-size: 0.8em;
+    margin: 0;
+    font-weight: 400;
+  }
+  .summary-row div a {
+    font-size: 0.8em;
+    font-weight: 400;
+  }
+  
+  .checkout-button {
+    background-color: #ff0;
+    color: #000;
+    border: none;
+    padding: 1rem;
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 1rem;
+  }
+  
