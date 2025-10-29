@@ -8,6 +8,13 @@ const Checkout = () => {
   const shipping = 20000;
   const total = subtotal + shipping;
 
+  const colombianDepartments = [
+    'Amazonas', 'Antioquia', 'Arauca', 'Atlántico', 'Bolívar', 'Boyacá', 'Caldas', 'Caquetá',
+    'Casanare', 'Cauca', 'Cesar', 'Chocó', 'Córdoba', 'Cundinamarca', 'Guainía', 'Guaviare',
+    'Huila', 'La Guajira', 'Magdalena', 'Meta', 'Nariño', 'Norte de Santander', 'Putumayo', 'Quindío',
+    'Risaralda', 'San Andrés y Providencia', 'Santander', 'Sucre', 'Tolima', 'Valle del Cauca', 'Vaupés', 'Vichada'
+  ];
+
   return (
     <div className="checkout">
       <div className="checkout-container">
@@ -45,6 +52,9 @@ const Checkout = () => {
               <label>Departamento *</label>
               <select>
                 <option>Elige una opción...</option>
+                {colombianDepartments.map(department => (
+                  <option key={department} value={department}>{department}</option>
+                ))}
               </select>
             </div>
             <div className="form-group">
@@ -110,7 +120,7 @@ const Checkout = () => {
               <label htmlFor="sistecredito">Sistecredito</label>
             </div>
             <p className="privacy-policy">
-              Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our política de privacidad.
+              Tus datos personales se utilizarán para procesar tu pedido, mejorar tu experiencia en este sitio web y para otros fines descritos en nuestra política de privacidad.
             </p>
             <button className="checkout-button">REALIZAR EL PEDIDO</button>
           </div>
