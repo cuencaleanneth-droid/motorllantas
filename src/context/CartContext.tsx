@@ -1,27 +1,33 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-const CartContext = createContext();
+// Definimos el tipo para un producto en el carrito
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  image: string;
+}
 
-export const useCart = () => {
-  return useContext(CartContext);
-};
+// Definimos el tipo para el valor del contexto
+interface CartContextType {
+  cartItems: Product[];
+  addToCart: (item: Product) => void;
+  removeFromCart: (id: number) => void;
+  updateQuantity: (id: number, quantity: number) => void;
+}
 
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([
-    {
-        id: 1,
-        name: 'Yokohama Advan 205/50R15 Tracción Segura',
-        price: 715058,
-        quantity: 1,
-        image: 'https://motorllantas.com/wp-content/uploads/2022/05/yokohama-advan-neova-ad08-rs.jpg',
-      },
-  ]);
+// Creamos el contexto con un valor inicial que coincida con el tipo
+const CartContext = createContext<CartContextType | undefined>(undefined);
 
-  const addToCart = (item) => {
-    setCartItems(prevItems => {
-      const existingItem = prevItems.find(i => i.id === item.id);
+export const CartProvider = ({ children }: { children: ReactNode }) => {
+  const [cartItems, setCartItems] = useState<Product[]>([]);
+
+  const addToCart = (item: Product) => {
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((i) => i.id === item.id);
       if (existingItem) {
-        return prevItems.map(i => 
+        return prevItems.map((i) =>
           i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
         );
       } else {
@@ -30,16 +36,18 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  const removeFromCart = (id) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== id));
+  const removeFromCart = (id: number) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
-  const updateQuantity = (id, quantity) => {
-    setCartItems(prevItems => 
-      prevItems.map(item => 
-        item.id === id ? { ...item, quantity } : item
-      )
-    );
+  const updateQuantity = (id: number, quantity: number) => {
+    if (quantity > 0) {
+      setCartItems((prevItems) =>
+        prevItems.map((item) =>
+          item.id === id ? { ...item, quantity } : item
+        )
+      );
+    }
   };
 
   return (
@@ -47,4 +55,13 @@ export const CartProvider = ({ children }) => {
       {children}
     </CartContext.Provider>
   );
+};
+
+// Hook personalizado para usar el contexto del carrito
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (context === undefined) {
+    throw new Error('useCart must be used within a CartProvider');
+  }
+  return context;
 };
