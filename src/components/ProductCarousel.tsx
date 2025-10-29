@@ -1,5 +1,3 @@
-
-// src/components/ProductCarousel.tsx
 import React from 'react';
 import Slider from 'react-slick';
 import ProductCard from './ProductCard';
@@ -8,12 +6,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { products } from '../data/products';
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 const formatPrice = (price: number) => {
   return `$ ${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
 };
 
 const ProductCarousel: React.FC = () => {
+  const { addToCart } = useCart();
   const settings = {
     dots: true,
     infinite: true,
@@ -45,6 +45,10 @@ const ProductCarousel: React.FC = () => {
     ],
   };
 
+  const handleAddToCart = (product: any) => {
+    addToCart(product);
+  };
+
   return (
     <div className="product-carousel-container">
       <div className="carousel-header">
@@ -59,6 +63,7 @@ const ProductCarousel: React.FC = () => {
               {...product}
               price={formatPrice(product.price)}
               oldPrice={product.oldPrice ? formatPrice(product.oldPrice) : undefined}
+              onAddToCart={() => handleAddToCart(product)}
             />
           ))}
         </Slider>

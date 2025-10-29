@@ -1,5 +1,3 @@
-
-// src/components/ProductCard.tsx
 import React from 'react';
 import './ProductCard.css';
 
@@ -14,6 +12,7 @@ interface ProductCardProps {
   price: string;
   brandLogo: string;
   discount: number;
+  onAddToCart: () => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -27,6 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   price,
   brandLogo,
   discount,
+  onAddToCart,
 }) => {
   return (
     <div className="product-card">
@@ -48,6 +48,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <div className="product-brand">
           <img src={brandLogo} alt="Brand" />
         </div>
+        <button className="add-to-cart-button" onClick={onAddToCart}>
+          Añadir al carrito
+        </button>
       </div>
     </div>
   );

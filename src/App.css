@@ -1,4 +1,3 @@
-
 body {
   background-color: #000;
   color: #fff;
@@ -210,70 +209,18 @@ main {
   color: black;
 }
 
-/* Estilos para cada tarjeta de producto */
-.product-card {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  width: 100%;
-  max-width: 180px; /* Ligeramente más ancho para mejor proporción */
-  margin: 0 auto; /* Aumenta el espacio entre tarjetas */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 380px; /* Altura fija para igualar las tarjetas */
-  overflow: hidden;
+.add-to-cart-button {
+  background-color: #FFD700;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
-
-/* Efecto al hacer hover sobre la tarjeta */
-.product-card:hover {
-  transform: translateY(-5px); /* Elevar la tarjeta al pasar el ratón */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Aumentar la sombra */
-}
-
-/* Estilo para la imagen del producto */
-.product-card img {
-  width: 100%;
-  height: 180px; /* Aumenta la altura de la imagen para llenar más espacio */
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 15px; /* Más espacio debajo de la imagen */
-}
-
-
-/* Título del producto */
-.product-card h3 {
-  font-size: 16px; /* Tamaño del texto */
-  font-weight: 600; /* Negrita */
-  color: #333; /* Color del texto */
-  margin-bottom: 8px; /* Espacio debajo del título */
-  text-transform: capitalize; /* Para hacer que el texto de cada producto inicie con mayúscula */
-}
-
-/* Precio */
-.product-card .price {
-  font-size: 18px; /* Tamaño del precio */
-  font-weight: 600; /* Negrita */
-  color: #e67e22; /* Color para el precio */
-  margin-bottom: 8px; /* Espacio debajo del precio */
-}
-
-/* Precio antiguo (tachado) */
-.product-card .old-price {
-  font-size: 14px; /* Tamaño del texto */
-  text-decoration: line-through; /* Tachado */
-  color: #888; /* Color gris para el precio antiguo */
-  margin-bottom: 8px; /* Espacio debajo del precio */
-}
-
-/* Stock disponible */
-.product-card .stock {
-  font-size: 14px; /* Tamaño del texto */
-  color: #555; /* Color gris para el texto */
-  margin-top: 10px; /* Espacio superior */
+.add-to-cart-button:hover {
+  background-color: #f2c400;
 }
