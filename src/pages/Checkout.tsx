@@ -3,7 +3,7 @@ import './Checkout.css';
 import { useCart } from '../context/CartContext';
 
 const Checkout = () => {
-  const { cartItems } = useCart();
+  const { cartItems, removeFromCart } = useCart(); // Agregamos removeFromCart
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const shipping = 20000;
   const total = subtotal + shipping;
@@ -18,15 +18,16 @@ const Checkout = () => {
   return (
     <div className="checkout">
       <div className="checkout-container">
+        {/* Columna de Detalles de Facturación */}
         <div className="billing-details">
-          <h2>Detalles de facturación</h2>
+          <h3>Detalles de facturación</h3>
           <form>
             <div className="form-row">
-              <div className="form-group">
+              <div className="form-group half-width">
                 <label>Nombre *</label>
                 <input type="text" />
               </div>
-              <div className="form-group">
+              <div className="form-group half-width">
                 <label>Apellidos *</label>
                 <input type="text" />
               </div>
@@ -37,7 +38,7 @@ const Checkout = () => {
             </div>
             <div className="form-group">
               <label>País / Región *</label>
-              <input type="text" value="Colombia" disabled />
+              <p><strong>Colombia</strong></p>
             </div>
             <div className="form-group">
               <label>Dirección de la calle *</label>
@@ -79,51 +80,41 @@ const Checkout = () => {
             </div>
           </form>
         </div>
+
+        {/* Columna del Pedido */}
         <div className="order-summary">
-          <h2>Tu pedido</h2>
-          <div className="cart-summary">
-            <div className="summary-row product-header">
-              <span>PRODUCTO</span>
-              <span>SUBTOTAL</span>
+          <h3>Tu pedido</h3>
+          <div className="order-review">
+            <div className="order-item-header">
+                <span>PRODUCTO</span>
+                <span>SUBTOTAL</span>
             </div>
             {cartItems.map(item => (
-              <div className="summary-row" key={item.id}>
-                <span>{item.name} × {item.quantity}</span>
-                <span>CO ${ (item.price * item.quantity).toLocaleString() }</span>
+              <div className="order-item" key={item.id}>
+                <div className="product-details">
+                  <button className="remove-button" onClick={() => removeFromCart(item.id)}>×</button>
+                  <img src={item.image} alt={item.name} className="product-image" />
+                  <span className="product-name">{item.name} × <strong>{item.quantity}</strong></span>
+                </div>
+                <span className="product-total">${(item.price * item.quantity).toLocaleString()}</span>
               </div>
             ))}
-            <div className="summary-row">
-              <span>Subtotal</span>
-              <span>CO ${subtotal.toLocaleString()}</span>
-            </div>
-            <div className="summary-row">
-              <span>Envío</span>
-              <span>CO ${shipping.toLocaleString()}</span>
-            </div>
-            <div className="summary-row total">
-              <span>Total</span>
-              <span>CO ${total.toLocaleString()}</span>
+            <div className="order-totals">
+                <div className="total-row">
+                    <span>Subtotal</span>
+                    <span>${subtotal.toLocaleString()}</span>
+                </div>
+                <div className="total-row">
+                    <span>Envío</span>
+                    <span>${shipping.toLocaleString()}</span>
+                </div>
+                <div className="total-row grand-total">
+                    <span>Total</span>
+                    <span>${total.toLocaleString()}</span>
+                </div>
             </div>
           </div>
-          <div className="payment-info">
-            <div className="payment-option">
-              <input type="radio" name="payment" id="bank-transfer" checked readOnly/>
-              <label htmlFor="bank-transfer">Transferencia bancaria directa</label>
-              <p>Realiza tu pago directamente en nuestra cuenta bancaria. Por favor, usa el número del pedido como referencia de pago. Tu pedido no se procesará hasta que se haya recibido el importe en nuestra cuenta.</p>
-            </div>
-            <div className="payment-option">
-              <input type="radio" name="payment" id="bold" />
-              <label htmlFor="bold">Pago en línea con Bold</label>
-            </div>
-            <div className="payment-option">
-              <input type="radio" name="payment" id="sistecredito" />
-              <label htmlFor="sistecredito">Sistecredito</label>
-            </div>
-            <p className="privacy-policy">
-              Tus datos personales se utilizarán para procesar tu pedido, mejorar tu experiencia en este sitio web y para otros fines descritos en nuestra política de privacidad.
-            </p>
-            <button className="checkout-button">REALIZAR EL PEDIDO</button>
-          </div>
+          {/* Payment info can go here, styled separately */}
         </div>
       </div>
     </div>
