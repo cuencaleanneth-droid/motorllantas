@@ -11,35 +11,45 @@ const ShoppingCart = () => {
   const total = subtotal + shipping;
 
   const handleCheckout = () => {
-    navigate('/checkout');
+    if (cartItems.length > 0) {
+      navigate('/checkout');
+    }
   };
+
+  const isCartEmpty = cartItems.length === 0;
 
   return (
     <div className="shopping-cart">
       <div className="cart-container">
         <div className="cart-items">
-          <div className="cart-item-header">
-            <span>PRODUCTO</span>
-            <span>PRECIO</span>
-            <span>CANTIDAD</span>
-            <span>SUBTOTAL</span>
-          </div>
-          {cartItems.map((item) => (
-            <div className="cart-item" key={item.id}>
-              <div className="product-info">
-                <button className="remove-item" onClick={() => removeFromCart(item.id)}>×</button>
-                <img src={item.image} alt={item.name} />
-                <span>{item.name}</span>
+          {isCartEmpty ? (
+            <p className="empty-cart-message">Tu carrito de compras está vacío.</p>
+          ) : (
+            <>
+              <div className="cart-item-header">
+                <span>PRODUCTO</span>
+                <span>PRECIO</span>
+                <span>CANTIDAD</span>
+                <span>SUBTOTAL</span>
               </div>
-              <div className="price">CO ${item.price.toLocaleString()}</div>
-              <div className="quantity">
-                <button onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>-</button>
-                <span>{item.quantity}</span>
-                <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
-              </div>
-              <div className="subtotal">CO ${ (item.price * item.quantity).toLocaleString() }</div>
-            </div>
-          ))}
+              {cartItems.map((item) => (
+                <div className="cart-item" key={item.id}>
+                  <div className="product-info">
+                    <button className="remove-item" onClick={() => removeFromCart(item.id)}>×</button>
+                    <img src={item.image} alt={item.name} />
+                    <span>{item.name}</span>
+                  </div>
+                  <div className="price">CO ${item.price.toLocaleString()}</div>
+                  <div className="quantity">
+                    <button onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>-</button>
+                    <span>{item.quantity}</span>
+                    <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
+                  </div>
+                  <div className="subtotal">CO ${(item.price * item.quantity).toLocaleString()}</div>
+                </div>
+              ))}
+            </>
+          )}
         </div>
         <div className="cart-summary">
           <h2>Total del carrito</h2>
@@ -59,7 +69,13 @@ const ShoppingCart = () => {
             <span>Total</span>
             <span>CO ${total.toLocaleString()}</span>
           </div>
-          <button className="checkout-button" onClick={handleCheckout}>FINALIZAR COMPRA</button>
+          <button
+            className="checkout-button"
+            onClick={handleCheckout}
+            disabled={isCartEmpty}
+          >
+            FINALIZAR COMPRA
+          </button>
         </div>
       </div>
     </div>

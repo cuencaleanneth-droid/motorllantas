@@ -130,4 +130,17 @@
     font-weight: bold;
     margin-top: 1rem;
   }
+
+  .checkout-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .empty-cart-message {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 2rem;
+    color: #555;
+  }
   
