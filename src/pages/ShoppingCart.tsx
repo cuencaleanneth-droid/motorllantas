@@ -59,12 +59,9 @@ const ShoppingCart = () => {
           </div>
           <div className="summary-row">
             <span>Envío</span>
-            <div>
-              <span>CO ${shipping.toLocaleString()}</span>
-              <p>Las opciones de envío se actualizarán durante el pago.</p>
-              <a href="#">Calcular envío</a>
-            </div>
+            <span className="shipping-price">CO ${shipping.toLocaleString()}</span>
           </div>
+          <p className="shipping-note">Las opciones de envío se actualizarán durante el pago.</p>
           <div className="summary-row total">
             <span>Total</span>
             <span>CO ${total.toLocaleString()}</span>

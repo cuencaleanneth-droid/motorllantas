@@ -101,23 +101,19 @@
   .summary-row.total {
     font-size: 1.2rem;
     font-weight: bold;
+    margin-top: 2rem; /* Add space above total */
   }
   
-  .summary-row span:last-child {
+  .summary-row span:last-child,
+  .shipping-price {
     font-weight: bold;
   }
-  .summary-row div {
-    text-align: right;
-  }
-  .summary-row div p {
-    font-size: 0.8em;
-    margin: 0;
-    font-weight: 400;
+
+  .shipping-note {
     text-align: left;
-  }
-  .summary-row div a {
-    font-size: 0.8em;
-    font-weight: 400;
+    font-size: 0.9em;
+    color: #555;
+    margin: -0.5rem 0 1.5rem 0; /* Adjust margin to bring it closer to the shipping line */
   }
   
   .checkout-button {
@@ -143,4 +139,3 @@
     padding: 2rem;
     color: #555;
   }
-  
