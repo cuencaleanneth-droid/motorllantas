@@ -46,9 +46,9 @@
   }
   
   .remove-item {
-    background: none;
-    border: 1px solid #ddd;
-    color: #ddd;
+    background: #000;
+    border: 1px solid #000;
+    color: #fff;
     cursor: pointer;
     margin-right: 1rem;
     border-radius: 50%;
