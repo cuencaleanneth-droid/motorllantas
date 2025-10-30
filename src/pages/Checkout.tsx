@@ -141,21 +141,21 @@ const Checkout = () => {
                   <img src={item.image} alt={item.name} className="product-image" />
                   <span className="product-name">{item.name} × <strong>{item.quantity}</strong></span>
                 </div>
-                <span className="product-total">${(item.price * item.quantity).toLocaleString()}</span>
+                <span className="product-total">COP ${(item.price * item.quantity).toLocaleString()}</span>
               </div>
             ))}
             <div className="order-totals">
                 <div className="total-row">
                     <span>Subtotal</span>
-                    <span>${subtotal.toLocaleString()}</span>
+                    <span>COP ${subtotal.toLocaleString()}</span>
                 </div>
                 <div className="total-row">
                     <span>Envío</span>
-                    <span>${shipping.toLocaleString()}</span>
+                    <span>COP ${shipping.toLocaleString()}</span>
                 </div>
                 <div className="total-row grand-total">
                     <span>Total</span>
-                    <span>${total.toLocaleString()}</span>
+                    <span>COP ${total.toLocaleString()}</span>
                 </div>
             </div>
           </div>

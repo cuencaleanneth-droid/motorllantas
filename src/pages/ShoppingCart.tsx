@@ -39,13 +39,13 @@ const ShoppingCart = () => {
                     <img src={item.image} alt={item.name} />
                     <span>{item.name}</span>
                   </div>
-                  <div className="price">CO ${item.price.toLocaleString()}</div>
+                  <div className="price">COP ${item.price.toLocaleString()}</div>
                   <div className="quantity">
                     <button onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>-</button>
                     <span>{item.quantity}</span>
                     <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
                   </div>
-                  <div className="subtotal">CO ${(item.price * item.quantity).toLocaleString()}</div>
+                  <div className="subtotal">COP ${(item.price * item.quantity).toLocaleString()}</div>
                 </div>
               ))}
             </>
@@ -55,16 +55,16 @@ const ShoppingCart = () => {
           <h2>Total del carrito</h2>
           <div className="summary-row">
             <span>Subtotal</span>
-            <span>CO ${subtotal.toLocaleString()}</span>
+            <span>COP ${subtotal.toLocaleString()}</span>
           </div>
           <div className="summary-row">
             <span>Envío</span>
-            <span className="shipping-price">CO ${shipping.toLocaleString()}</span>
+            <span className="shipping-price">COP ${shipping.toLocaleString()}</span>
           </div>
           <p className="shipping-note">Las opciones de envío se actualizarán durante el pago.</p>
           <div className="summary-row total">
             <span>Total</span>
-            <span>CO ${total.toLocaleString()}</span>
+            <span>COP ${total.toLocaleString()}</span>
           </div>
           <button
             className="checkout-button"
