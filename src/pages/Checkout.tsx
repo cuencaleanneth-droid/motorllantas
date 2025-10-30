@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Checkout.css';
 import { useCart } from '../context/CartContext';
 
 const Checkout = () => {
-  const { cartItems, removeFromCart } = useCart(); // Agregamos removeFromCart
+  const { cartItems, removeFromCart } = useCart();
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const shipping = 20000;
   const total = subtotal + shipping;
+
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    companyName: '',
+    address1: '',
+    address2: '',
+    city: '',
+    department: '',
+    postcode: '',
+    phone: '',
+    email: '',
+  });
+
+  const [errors, setErrors] = useState<Record<string, boolean>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const colombianDepartments = [
     'Amazonas', 'Antioquia', 'Arauca', 'Atlántico', 'Bolívar', 'Boyacá', 'Caldas', 'Caquetá',
@@ -15,73 +31,102 @@ const Checkout = () => {
     'Risaralda', 'San Andrés y Providencia', 'Santander', 'Sucre', 'Tolima', 'Valle del Cauca', 'Vaupés', 'Vichada'
   ];
 
+  const validateField = (name: string, value: string) => {
+    let hasError = false;
+    const requiredFields = ['firstName', 'lastName', 'address1', 'city', 'department', 'phone', 'email'];
+
+    if (requiredFields.includes(name) && !value.trim()) {
+        hasError = true;
+    }
+
+    if (name === 'email' && value && !/\S+@\S+\.\S+/.test(value)) {
+        hasError = true;
+    }
+
+    setErrors(prev => ({ ...prev, [name]: hasError }));
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setTouched(prev => ({ ...prev, [name]: true }));
+    validateField(name, value);
+  };
+
+  const renderError = (fieldName: string) => {
+    if (touched[fieldName] && errors[fieldName]) {
+        return <span className="error-asterisk">*</span>;
+    }
+    return null;
+  };
+
   return (
     <div className="checkout">
       <div className="checkout-container">
-        {/* Columna de Detalles de Facturación */}
         <div className="billing-details">
           <h3>Detalles de facturación</h3>
-          <form>
+          <form noValidate>
             <div className="form-row">
               <div className="form-group half-width">
-                <label>Nombre *</label>
-                <input type="text" />
+                <label>Nombre:{renderError('firstName')}</label>
+                <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} onBlur={handleBlur} />
               </div>
               <div className="form-group half-width">
-                <label>Apellidos *</label>
-                <input type="text" />
+                <label>Apellidos:{renderError('lastName')}</label>
+                <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} onBlur={handleBlur} />
               </div>
             </div>
             <div className="form-group">
-              <label>Nombre de la empresa (opcional)</label>
-              <input type="text" />
+              <label>Nombre de la empresa (opcional):</label>
+              <input type="text" name="companyName" value={formData.companyName} onChange={handleChange} />
             </div>
             <div className="form-group">
-              <label>País / Región *</label>
+              <label>País / Región:</label>
               <p><strong>Colombia</strong></p>
             </div>
             <div className="form-group">
-              <label>Dirección de la calle *</label>
-              <input type="text" placeholder="Número de la casa y nombre de la calle" />
-              <input type="text" placeholder="Apartamento, habitación, etc. (opcional)" />
+              <label>Dirección de la calle:{renderError('address1')}</label>
+              <input type="text" name="address1" placeholder="Número de la casa y nombre de la calle" value={formData.address1} onChange={handleChange} onBlur={handleBlur} />
+              <input type="text" name="address2" placeholder="Apartamento, habitación, etc. (opcional)" value={formData.address2} onChange={handleChange} />
             </div>
             <div className="form-group">
-              <label>Localidad / Ciudad *</label>
-              <input type="text" />
+              <label>Localidad / Ciudad:{renderError('city')}</label>
+              <input type="text" name="city" value={formData.city} onChange={handleChange} onBlur={handleBlur} />
             </div>
             <div className="form-group">
-              <label>Departamento *</label>
-              <select>
-                <option>Elige una opción...</option>
-                {colombianDepartments.map(department => (
-                  <option key={department} value={department}>{department}</option>
-                ))}
+              <label>Departamento:{renderError('department')}</label>
+              <select name="department" value={formData.department} onChange={handleChange} onBlur={handleBlur}>
+                <option value="">Elige una opción...</option>
+                {colombianDepartments.map(dep => <option key={dep} value={dep}>{dep}</option>)}
               </select>
             </div>
             <div className="form-group">
-              <label>Código postal (opcional)</label>
-              <input type="text" />
+              <label>Código postal (opcional):</label>
+              <input type="text" name="postcode" value={formData.postcode} onChange={handleChange} />
             </div>
             <div className="form-group">
-              <label>Teléfono *</label>
-              <input type="text" />
+              <label>Teléfono:{renderError('phone')}</label>
+              <input type="text" name="phone" value={formData.phone} onChange={handleChange} onBlur={handleBlur} />
             </div>
             <div className="form-group">
-              <label>Dirección de correo electrónico *</label>
-              <input type="email" />
+              <label>Dirección de correo electrónico:{renderError('email')}</label>
+              <input type="email" name="email" value={formData.email} onChange={handleChange} onBlur={handleBlur} />
             </div>
             <div className="form-group-checkbox">
               <input type="checkbox" id="different-address" />
               <label htmlFor="different-address">¿Enviar a una dirección diferente?</label>
             </div>
             <div className="form-group">
-              <label>Notas del pedido (opcional)</label>
-              <textarea placeholder="Notas sobre tu pedido, por ejemplo, notas especiales para la entrega."></textarea>
+              <label>Notas del pedido (opcional):</label>
+              <textarea name="orderNotes" placeholder="Notas sobre tu pedido, por ejemplo, notas especiales para la entrega."></textarea>
             </div>
           </form>
         </div>
 
-        {/* Columna del Pedido */}
         <div className="order-summary">
           <h3>Tu pedido</h3>
           <div className="order-review">
@@ -114,7 +159,6 @@ const Checkout = () => {
                 </div>
             </div>
           </div>
-          {/* Payment info can go here, styled separately */}
         </div>
       </div>
     </div>

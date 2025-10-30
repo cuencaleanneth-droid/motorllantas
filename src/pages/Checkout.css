@@ -1,7 +1,7 @@
 /* General Checkout Page Styling */
 .checkout {
-    padding: 2rem 4rem; /* More padding on the sides */
-    background-color: #f8f9fa; /* Lighter grey background */
+    padding: 2rem 4rem;
+    background-color: #f8f9fa;
     color: #333;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
@@ -9,14 +9,14 @@
 .checkout-container {
     display: flex;
     justify-content: space-between;
-    gap: 3rem; /* Increased gap between columns */
+    gap: 3rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 /* Billing Details Column */
 .billing-details {
-    flex: 2; /* Takes up 2/3 of the space */
+    flex: 2;
     background-color: #fff;
     padding: 2.5rem;
     border: 1px solid #e0e0e0;
@@ -28,6 +28,7 @@
     margin-top: 0;
     margin-bottom: 2rem;
     font-weight: 600;
+    text-align: left; /* Ensure title is left-aligned */
 }
 
 .form-row {
@@ -37,6 +38,7 @@
 
 .form-group {
     margin-bottom: 1.5rem;
+    text-align: left; /* Align label and input container to the left */
 }
 
 .form-group.half-width {
@@ -44,16 +46,13 @@
 }
 
 .form-group label {
-    display: block;
+    display: inline-block; /* Allow asterisk to sit next to it */
     margin-bottom: 0.5rem;
     font-weight: 600;
     font-size: 0.9rem;
 }
 
-.form-group label:after {
-    content: ' *';
-    color: #e53935;
-}
+/* REMOVED the global :after rule for asterisks */
 
 .form-group input, 
 .form-group select,
@@ -63,18 +62,12 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
-    box-sizing: border-box; /* Important for padding and width */
+    box-sizing: border-box;
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
     color: #999;
-}
-
-/* Remove asterisk for optional fields */
-.form-group:has(label:contains('(opcional)')) label:after,
-.form-group-checkbox label:after {
-    content: '';
 }
 
 .form-group p {
@@ -96,9 +89,15 @@
     resize: vertical;
 }
 
+.error-asterisk {
+    color: #e53935;
+    margin-left: 2px;
+    font-weight: bold;
+}
+
 /* Order Summary Column */
 .order-summary {
-    flex: 1; /* Takes up 1/3 of the space */
+    flex: 1;
 }
 
 .order-summary h3 {
@@ -106,6 +105,7 @@
     margin-top: 0;
     margin-bottom: 2rem;
     font-weight: 600;
+    text-align: left; /* Ensure title is left-aligned */
 }
 
 .order-review {
@@ -176,7 +176,7 @@
 }
 
 .total-row span:last-child {
-    color: #e53935; /* Red color for prices */
+    color: #e53935;
     font-weight: bold;
 }
 
@@ -186,7 +186,6 @@
     margin-top: 0.5rem;
 }
 
-/* Remove payment section for now to match the image */
 .payment-info {
     display: none;
 }
