@@ -32,8 +32,19 @@ const Checkout = () => {
   const validateField = (name: string, value: string) => {
     let hasError = false;
     const requiredFields = ['firstName', 'lastName', 'address1', 'city', 'department', 'phone', 'email'];
-    if (requiredFields.includes(name) && !value.trim()) hasError = true;
-    if (name === 'email' && value && !/\S+@\S+\.\S+/.test(value)) hasError = true;
+    
+    if (requiredFields.includes(name) && !value.trim()) {
+        hasError = true;
+    }
+
+    if (name === 'email' && value && !/\S+@\S+\.\S+/.test(value)) {
+        hasError = true;
+    }
+
+    if (paymentMethod === 'sistecredito' && name === 'documentNumber' && !value.trim()) {
+        hasError = true;
+    }
+
     setErrors(prev => ({ ...prev, [name]: hasError }));
   };
 
@@ -45,6 +56,10 @@ const Checkout = () => {
   const handleSistecreditoChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setSistecreditoData(prev => ({ ...prev, [name]: value }));
+    // Also clear error when user starts typing
+    if (name === 'documentNumber') {
+      setErrors(prev => ({...prev, documentNumber: false}));
+    }
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -146,15 +161,15 @@ const Checkout = () => {
                   <div className="sistecredito-info-dropdown">
                     <div className="form-row">
                       <div className="form-group half-width">
-                        <label>Tipo Documento <span className="error-asterisk">*</span></label>
+                        <label>Tipo Documento</label>
                         <select name="documentType" value={sistecreditoData.documentType} onChange={handleSistecreditoChange}>
                           <option>Cedula de Ciudadania</option>
                           <option>Cedula de Extranjeria</option>
                         </select>
                       </div>
                       <div className="form-group half-width">
-                        <label>Numero Documento <span className="error-asterisk">*</span></label>
-                        <input type="text" name="documentNumber" value={sistecreditoData.documentNumber} onChange={handleSistecreditoChange} />
+                        <label>Numero Documento{renderError('documentNumber')}</label>
+                        <input type="text" name="documentNumber" value={sistecreditoData.documentNumber} onChange={handleSistecreditoChange} onBlur={handleBlur} />
                       </div>
                     </div>
                   </div>
