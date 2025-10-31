@@ -56,11 +56,11 @@
 .payment-section-left h3 { font-size: 1.5rem; margin-bottom: 1.5rem; }
 .payment-option-left { display: flex; align-items: center; flex-wrap: wrap; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 1rem; }
 .payment-option-left input[type="radio"] { margin-right: 1rem; }
-.payment-option-left label { font-weight: 600; flex-grow: 1; }
+.payment-option-left label { font-weight: 600; /* Removed flex-grow: 1 */ }
 
 .payment-info-box { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; margin-top: 1rem; width: 100%; color: #555; font-size: 0.9rem; }
-.payment-logos-bold { height: 30px; } /* Increased size */
-.payment-logo-sistecredito { height: 30px; }
+.payment-logos-bold { height: 30px; margin-left: auto; } /* Increased size & aligned right */
+.payment-logo-sistecredito { height: 30px; margin-left: auto; } /* Aligned right */
 
 /* Bold Info Dropdown */
 .bold-info-dropdown {
