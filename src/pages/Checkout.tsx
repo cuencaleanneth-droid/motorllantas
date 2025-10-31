@@ -76,14 +76,43 @@ const Checkout = () => {
                 <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} onBlur={handleBlur} />
               </div>
             </div>
-            {/* ... other fields ... */}
+            <div className="form-group">
+              <label>Nombre de la empresa (opcional):</label>
+              <input type="text" name="companyName" value={formData.companyName} onChange={handleChange} />
+            </div>
+            <div className="form-group">
+                <label>Dirección de la calle:{renderError('address1')}</label>
+                <input type="text" name="address1" placeholder="Número de casa y nombre de la calle" value={formData.address1} onChange={handleChange} onBlur={handleBlur} />
+                <input type="text" name="address2" placeholder="Apartamento, suite, unidad, etc. (opcional)" value={formData.address2} onChange={handleChange} style={{ marginTop: '1rem' }} />
+            </div>
+            <div className="form-group">
+                <label>Localidad / Ciudad:{renderError('city')}</label>
+                <input type="text" name="city" value={formData.city} onChange={handleChange} onBlur={handleBlur} />
+            </div>
+            <div className="form-group">
+                <label>Departamento:{renderError('department')}</label>
+                <select name="department" value={formData.department} onChange={handleChange} onBlur={handleBlur} className="form-group">
+                    <option value="">Selecciona un departamento...</option>
+                    {colombianDepartments.map(dep => <option key={dep} value={dep}>{dep}</option>)}
+                </select>
+            </div>
+            <div className="form-row">
+                <div className="form-group half-width">
+                    <label>Teléfono:{renderError('phone')}</label>
+                    <input type="text" name="phone" value={formData.phone} onChange={handleChange} onBlur={handleBlur} />
+                </div>
+                <div className="form-group half-width">
+                    <label>Dirección de correo electrónico:{renderError('email')}</label>
+                    <input type="email" name="email" value={formData.email} onChange={handleChange} onBlur={handleBlur} />
+                </div>
+            </div>
             <div className="form-group">
               <label>Notas del pedido (opcional):</label>
               <textarea name="orderNotes" placeholder="Notas sobre tu pedido, por ejemplo, notas especiales para la entrega."></textarea>
             </div>
 
             <div className="payment-section-left">
-              <h3>Payment Information</h3>
+              <h3>Tu pago</h3>
               <div className="payment-option-left">
                 <input type="radio" id="transfer" name="paymentMethod" value="transfer" checked={paymentMethod === 'transfer'} onChange={() => setPaymentMethod('transfer')} />
                 <label htmlFor="transfer">Transferencia bancaria directa</label>
@@ -143,7 +172,36 @@ const Checkout = () => {
 
         <div className="order-summary">
             <h3>Tu pedido</h3>
-            {/* ... order summary content ... */}
+            <div className="order-review">
+                <div className="order-item-header" style={{display: 'flex', justifyContent: 'space-between', fontWeight: '600', paddingBottom: '1rem', borderBottom: '2px solid #eee'}}>
+                    <span>PRODUCTO</span>
+                    <span>SUBTOTAL</span>
+                </div>
+                {cartItems.map(item => (
+                <div className="order-item" key={item.id}>
+                    <div className="product-details">
+                    <button className="remove-button" onClick={() => removeFromCart(item.id)} style={{border: '1px solid #ccc', background: 'none', color: '#ccc', borderRadius: '50%', width: '20px', height: '20px', lineHeight: '18px', textAlign: 'center', cursor: 'pointer', marginRight: '10px'}} >×</button>
+                    <img src={item.image} alt={item.name} className="product-image" />
+                    <span className="product-name">{item.name} × <strong>{item.quantity}</strong></span>
+                    </div>
+                    <span className="product-total">COP ${(item.price * item.quantity).toLocaleString()}</span>
+                </div>
+                ))}
+                <div className="order-totals">
+                    <div className="total-row">
+                        <span>Subtotal</span>
+                        <span>COP ${subtotal.toLocaleString()}</span>
+                    </div>
+                    <div className="total-row">
+                        <span>Envío</span>
+                        <span>COP ${shipping.toLocaleString()}</span>
+                    </div>
+                    <div className="total-row grand-total">
+                        <span>Total</span>
+                        <span>COP ${total.toLocaleString()}</span>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
     </div>
