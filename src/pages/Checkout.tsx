@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Checkout.css';
 import { useCart } from '../context/CartContext';
+import sistecreditoLogo from '../assets/img/sistecredito.png';
+import boldLogo from '../assets/img/pagasegurobold.png';
 
 const Checkout = () => {
   const { cartItems, removeFromCart } = useCart();
@@ -23,6 +25,7 @@ const Checkout = () => {
 
   const [errors, setErrors] = useState<Record<string, boolean>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [paymentMethod, setPaymentMethod] = useState('transfer');
 
   const colombianDepartments = [
     'Amazonas', 'Antioquia', 'Arauca', 'Atlántico', 'Bolívar', 'Boyacá', 'Caldas', 'Caquetá',
@@ -123,6 +126,58 @@ const Checkout = () => {
             <div className="form-group">
               <label>Notas del pedido (opcional):</label>
               <textarea name="orderNotes" placeholder="Notas sobre tu pedido, por ejemplo, notas especiales para la entrega."></textarea>
+            </div>
+
+            <div className="payment-section-left">
+              <h3>Payment Information</h3>
+              <div className="payment-option-left">
+                <input 
+                  type="radio" 
+                  id="transfer" 
+                  name="paymentMethod" 
+                  value="transfer" 
+                  checked={paymentMethod === 'transfer'}
+                  onChange={() => setPaymentMethod('transfer')}
+                />
+                <label htmlFor="transfer">Transferencia bancaria directa</label>
+                {paymentMethod === 'transfer' && (
+                  <div className="payment-info-box">
+                    <p>Realiza tu pago directamente en nuestra cuenta bancaria. Por favor, usa el número del pedido como referencia de pago. Tu pedido no se procesará hasta que se haya recibido el importe en nuestra cuenta.</p>
+                  </div>
+                )}
+              </div>
+
+              <div className="payment-option-left">
+                <input 
+                  type="radio" 
+                  id="bold" 
+                  name="paymentMethod" 
+                  value="bold" 
+                  checked={paymentMethod === 'bold'}
+                  onChange={() => setPaymentMethod('bold')}
+                />
+                <label htmlFor="bold">Paga en línea con Bold</label>
+                <img src={boldLogo} alt="Pago Seguro Bold" className="payment-logos-bold" />
+              </div>
+
+              <div className="payment-option-left">
+                <input 
+                  type="radio" 
+                  id="sistecredito" 
+                  name="paymentMethod" 
+                  value="sistecredito" 
+                  checked={paymentMethod === 'sistecredito'}
+                  onChange={() => setPaymentMethod('sistecredito')}
+                />
+                <label htmlFor="sistecredito">Sistecredito</label>
+                <img src={sistecreditoLogo} alt="Sistecredito" className="payment-logo-sistecredito" />
+              </div>
+
+              <div className="privacy-policy-text">
+                  <p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <strong>política de privacidad</strong>.</p>
+              </div>
+
+              <button type="submit" className="place-order-button-red">Realizar El Pedido</button>
             </div>
           </form>
         </div>
