@@ -31,119 +31,73 @@
     text-align: left;
 }
 
-.form-row, .form-group {
-    margin-bottom: 1.5rem;
-    text-align: left;
-}
-
+.form-row, .form-group { margin-bottom: 1.5rem; text-align: left; }
 .form-row { display: flex; gap: 1.5rem; }
 .form-group.half-width { flex: 1; }
-
-.form-group label {
-    display: inline-block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-.form-group input, .form-group select, .form-group textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    box-sizing: border-box;
-}
-
-.form-group input::placeholder, .form-group textarea::placeholder { color: #999; }
-.form-group p { margin: 0; }
-
-.error-asterisk {
-    color: #e53935;
-    margin-left: 2px;
-    font-weight: bold;
-}
+.form-group label { display: inline-block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; box-sizing: border-box; }
+.error-asterisk { color: #e53935; margin-left: 2px; font-weight: bold; }
 
 /* Order Summary Column */
 .order-summary { flex: 1; }
-
-.order-summary h3 {
-    font-size: 1.75rem;
-    margin-top: 0;
-    margin-bottom: 2rem;
-    font-weight: 600;
-    text-align: left;
-}
-
-.order-review {
-    background-color: #fff;
-    padding: 2rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-}
-
-.order-item, .total-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
+.order-summary h3 { font-size: 1.75rem; margin-top: 0; margin-bottom: 2rem; font-weight: 600; text-align: left; }
+.order-review { background-color: #fff; padding: 2rem; border: 1px solid #e0e0e0; border-radius: 4px; }
+.order-item, .total-row { display: flex; justify-content: space-between; align-items: center; }
 .order-item { padding: 1rem 0; border-bottom: 1px solid #eee; }
 .product-details { display: flex; align-items: center; gap: 1rem; }
 .product-image { width: 60px; height: 60px; }
-.product-name, .product-total, .total-row span {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #000;
-}
+.product-name, .product-total, .total-row span { font-size: 0.95rem; font-weight: 600; color: #000; }
 .order-totals { margin-top: 1.5rem; }
 .total-row { padding: 0.75rem 0; }
 .grand-total { font-size: 1.25rem; border-top: 2px solid #eee; margin-top: 0.5rem; }
 
 /* New Payment Section (Left Column) */
-.payment-section-left {
-    margin-top: 2.5rem;
-    padding-top: 2.5rem;
-    border-top: 1px solid #eee;
-}
-
-.payment-section-left h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.payment-option-left {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-}
-
+.payment-section-left { margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid #eee; }
+.payment-section-left h3 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+.payment-option-left { display: flex; align-items: center; flex-wrap: wrap; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 1rem; }
 .payment-option-left input[type="radio"] { margin-right: 1rem; }
 .payment-option-left label { font-weight: 600; flex-grow: 1; }
 
-.payment-info-box {
-    background-color: #f8f9fa;
-    border-radius: 4px;
-    padding: 1rem;
-    margin-top: 1rem;
-    width: 100%;
-    color: #555;
-    font-size: 0.9rem;
-}
-
+.payment-info-box { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; margin-top: 1rem; width: 100%; color: #555; font-size: 0.9rem; }
 .payment-logos-bold { height: 20px; }
 .payment-logo-sistecredito { height: 30px; }
 
-.privacy-policy-text {
-    margin: 2rem 0;
-    font-size: 0.85rem;
-    color: #555;
+/* Bold Info Dropdown */
+.bold-info-dropdown {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #ddd;
 }
 
+.bold-dropdown-logo {
+    height: 40px;
+    margin-bottom: 1rem;
+}
+
+.bold-info-dropdown p {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0 0 1.5rem 0;
+}
+
+.compra-protegida-box {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.compra-protegida-img {
+    max-width: 100%;
+}
+
+.privacy-policy-text { margin: 2rem 0; font-size: 0.85rem; color: #555; }
 .privacy-policy-text strong { color: #000; }
 
 .place-order-button-red {
