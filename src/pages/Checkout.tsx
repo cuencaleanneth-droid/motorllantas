@@ -162,7 +162,7 @@ const Checkout = () => {
               </div>
 
               <div className="privacy-policy-text">
-                <p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <strong>política de privacidad</strong>.</p>
+                <p>Tus datos personales se utilizarán para procesar tu pedido, mejorar tu experiencia en este sitio web y para otros fines descritos en nuestra <strong>política de privacidad</strong>.</p>
               </div>
 
               <button type="submit" className="place-order-button-red">Realizar El Pedido</button>
