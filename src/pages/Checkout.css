@@ -59,7 +59,7 @@
 .payment-option-left label { font-weight: 600; flex-grow: 1; }
 
 .payment-info-box { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; margin-top: 1rem; width: 100%; color: #555; font-size: 0.9rem; }
-.payment-logos-bold { height: 20px; }
+.payment-logos-bold { height: 30px; } /* Increased size */
 .payment-logo-sistecredito { height: 30px; }
 
 /* Bold Info Dropdown */
