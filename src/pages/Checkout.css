@@ -73,16 +73,8 @@
     border: 1px solid #ddd;
 }
 
-.bold-dropdown-logo {
-    height: 40px;
-    margin-bottom: 1rem;
-}
-
-.bold-info-dropdown p {
-    font-size: 0.95rem;
-    color: #555;
-    margin: 0 0 1.5rem 0;
-}
+.bold-dropdown-logo { height: 40px; margin-bottom: 1rem; }
+.bold-info-dropdown p { font-size: 0.95rem; color: #555; margin: 0 0 1.5rem 0; }
 
 .compra-protegida-box {
     background-color: #fff;
@@ -93,8 +85,20 @@
     align-items: center;
 }
 
-.compra-protegida-img {
-    max-width: 100%;
+.compra-protegida-img { max-width: 100%; }
+
+/* Sistecredito Info Dropdown */
+.sistecredito-info-dropdown {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.sistecredito-info-dropdown .form-group {
+    margin-bottom: 0; /* Remove extra margin inside */
 }
 
 .privacy-policy-text { margin: 2rem 0; font-size: 0.85rem; color: #555; }
