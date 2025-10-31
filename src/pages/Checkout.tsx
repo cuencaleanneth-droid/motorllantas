@@ -180,7 +180,7 @@ const Checkout = () => {
                 <p>Tus datos personales se utilizarán para procesar tu pedido, mejorar tu experiencia en este sitio web y para otros fines descritos en nuestra <strong>política de privacidad</strong>.</p>
               </div>
 
-              <button type="submit" className="place-order-button-red">Realizar El Pedido</button>
+              <button type="submit" className="place-order-button">Realizar El Pedido</button>
             </div>
           </form>
         </div>

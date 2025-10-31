@@ -104,11 +104,11 @@
 .privacy-policy-text { margin: 2rem 0; font-size: 0.85rem; color: #555; }
 .privacy-policy-text strong { color: #000; }
 
-.place-order-button-red {
+.place-order-button {
     width: 100%;
     padding: 1rem;
-    background-color: #e53935;
-    color: #fff;
+    background-color: #FFC700; /* Yellow background */
+    color: #111; /* Dark text for contrast */
     border: none;
     border-radius: 25px;
     font-size: 1.1rem;
@@ -117,4 +117,4 @@
     transition: background-color 0.2s;
 }
 
-.place-order-button-red:hover { background-color: #d32f2f; }
+.place-order-button:hover { background-color: #e6b300; }
