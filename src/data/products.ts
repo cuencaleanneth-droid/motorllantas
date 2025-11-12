@@ -1,6 +1,6 @@
 export const products = [
   {
-    imageUrl: 'https://motorllantas.com/wp-content/uploads/2024/07/Nankang-NS-2-205-45R16.jpg',
+    imageUrl: 'https://motorllantas.com/wp-content/uploads/2025/07/FullRun-Frun-One.jpg',
     title: 'Nankang NS-2 205/45R16',
     grip: 'Mejor Agarre',
     rating: 5,
@@ -12,7 +12,7 @@ export const products = [
     discount: 10,
   },
   {
-    imageUrl: 'https://motorllantas.com/wp-content/uploads/2024/07/Boto-GENESYS-205-60R15.jpg',
+    imageUrl: 'https://motorllantas.com/wp-content/uploads/2025/07/GOODRIDE-SA57.jpg',
     title: 'Boto GENESYS 205/60R15',
     grip: 'Mejor Agarre',
     rating: 5,
@@ -24,7 +24,7 @@ export const products = [
     discount: 8,
   },
   {
-    imageUrl: 'https://motorllantas.com/wp-content/uploads/2024/07/Ceat-SPORTDRIVE-205-45R17.jpg',
+    imageUrl: 'https://motorllantas.com/wp-content/uploads/2025/07/GOODRIDE-RP28.jpg',
     title: 'Ceat SPORTDRIVE 205/45R17',
     grip: 'XL Mejor Agarre',
     rating: 5,
@@ -36,7 +36,7 @@ export const products = [
     discount: 5,
   },
   {
-    imageUrl: 'https://motorllantas.com/wp-content/uploads/2024/07/Nankang-NS-2-205-45R17.jpg',
+    imageUrl: 'https://motorllantas.com/wp-content/uploads/2025/07/FullRun-Frun-One.jpg',
     title: 'Nankang NS-2 205/45R17',
     grip: 'Mejor Agarre',
     rating: 5,
@@ -48,7 +48,7 @@ export const products = [
     discount: 9,
   },
   {
-    imageUrl: 'https://motorllantas.com/wp-content/uploads/2024/07/Nankang-AS-2-205-45R17.jpg',
+    imageUrl: 'https://motorllantas.com/wp-content/uploads/2025/07/H735-hankook.jpg',
     title: 'Nankang AS-2+ 205/45R17',
     grip: 'Mejor Agarre',
     rating: 5,

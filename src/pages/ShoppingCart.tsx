@@ -7,7 +7,7 @@ const ShoppingCart = () => {
   const navigate = useNavigate();
 
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  const shipping = 20000;
+  const shipping = 0;
   const total = subtotal + shipping;
 
   const handleCheckout = () => {

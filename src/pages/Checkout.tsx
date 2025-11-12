@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import './Checkout.css';
 import { useCart } from '../context/CartContext';
+import { initMercadoPago } from '@mercadopago/sdk-react';
+import './Checkout.css';
 
 const Checkout = () => {
   const { cartItems, removeFromCart } = useCart();
@@ -36,11 +37,11 @@ const Checkout = () => {
     const requiredFields = ['firstName', 'lastName', 'address1', 'city', 'department', 'phone', 'email'];
 
     if (requiredFields.includes(name) && !value.trim()) {
-        hasError = true;
+      hasError = true;
     }
 
     if (name === 'email' && value && !/\S+@\S+\.\S+/.test(value)) {
-        hasError = true;
+      hasError = true;
     }
 
     setErrors(prev => ({ ...prev, [name]: hasError }));
@@ -59,105 +60,115 @@ const Checkout = () => {
 
   const renderError = (fieldName: string) => {
     if (touched[fieldName] && errors[fieldName]) {
-        return <span className="error-asterisk">*</span>;
+      return <span className="error-asterisk">*</span>;
     }
     return null;
+  };
+
+  // ✅ Inicializa Mercado Pago (con tu PUBLIC_KEY)
+  initMercadoPago(import.meta.env.VITE_PUBLIC_KEY, { locale: 'es-CO' });
+
+  const handlePay = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/payments/create_preference', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: 'Compra en MiTienda',
+          quantity: 1,
+          price: total,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.init_point) {
+        window.location.href = data.init_point;
+      } else {
+        console.error('No se recibió init_point:', data);
+        alert('Error al iniciar el pago');
+      }
+    } catch (error) {
+      console.error('❌ Error al conectar con el servidor:', error);
+      alert('Error al procesar el pago');
+    }
   };
 
   return (
     <div className="checkout">
       <div className="checkout-container">
+        {/* 🧾 FORMULARIO DE FACTURACIÓN */}
         <div className="billing-details">
           <h3>Detalles de facturación</h3>
-          <form noValidate>
+          <form noValidate className="checkout-form">
             <div className="form-row">
-              <div className="form-group half-width">
-                <label>Nombre:{renderError('firstName')}</label>
-                <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} onBlur={handleBlur} />
+              <div className="form-group">
+                <label>Nombre {renderError('firstName')}</label>
+                <input name="firstName" value={formData.firstName} onChange={handleChange} onBlur={handleBlur} />
               </div>
-              <div className="form-group half-width">
-                <label>Apellidos:{renderError('lastName')}</label>
-                <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} onBlur={handleBlur} />
+              <div className="form-group">
+                <label>Apellidos {renderError('lastName')}</label>
+                <input name="lastName" value={formData.lastName} onChange={handleChange} onBlur={handleBlur} />
               </div>
             </div>
+
             <div className="form-group">
-              <label>Nombre de la empresa (opcional):</label>
-              <input type="text" name="companyName" value={formData.companyName} onChange={handleChange} />
+              <label>Dirección {renderError('address1')}</label>
+              <input name="address1" value={formData.address1} onChange={handleChange} onBlur={handleBlur} />
             </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label>Ciudad {renderError('city')}</label>
+                <input name="city" value={formData.city} onChange={handleChange} onBlur={handleBlur} />
+              </div>
+              <div className="form-group">
+                <label>Departamento {renderError('department')}</label>
+                <select name="department" value={formData.department} onChange={handleChange} onBlur={handleBlur}>
+                  <option value="">Seleccione...</option>
+                  {colombianDepartments.map(dep => (
+                    <option key={dep} value={dep}>{dep}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
             <div className="form-group">
-              <label>País / Región:</label>
-              <p><strong>Colombia</strong></p>
+              <label>Teléfono {renderError('phone')}</label>
+              <input name="phone" value={formData.phone} onChange={handleChange} onBlur={handleBlur} />
             </div>
+
             <div className="form-group">
-              <label>Dirección de la calle:{renderError('address1')}</label>
-              <input type="text" name="address1" placeholder="Número de la casa y nombre de la calle" value={formData.address1} onChange={handleChange} onBlur={handleBlur} />
-              <input type="text" name="address2" placeholder="Apartamento, habitación, etc. (opcional)" value={formData.address2} onChange={handleChange} />
-            </div>
-            <div className="form-group">
-              <label>Localidad / Ciudad:{renderError('city')}</label>
-              <input type="text" name="city" value={formData.city} onChange={handleChange} onBlur={handleBlur} />
-            </div>
-            <div className="form-group">
-              <label>Departamento:{renderError('department')}</label>
-              <select name="department" value={formData.department} onChange={handleChange} onBlur={handleBlur}>
-                <option value="">Elige una opción...</option>
-                {colombianDepartments.map(dep => <option key={dep} value={dep}>{dep}</option>)}
-              </select>
-            </div>
-            <div className="form-group">
-              <label>Código postal (opcional):</label>
-              <input type="text" name="postcode" value={formData.postcode} onChange={handleChange} />
-            </div>
-            <div className="form-group">
-              <label>Teléfono:{renderError('phone')}</label>
-              <input type="text" name="phone" value={formData.phone} onChange={handleChange} onBlur={handleBlur} />
-            </div>
-            <div className="form-group">
-              <label>Dirección de correo electrónico:{renderError('email')}</label>
-              <input type="email" name="email" value={formData.email} onChange={handleChange} onBlur={handleBlur} />
-            </div>
-            <div className="form-group-checkbox">
-              <input type="checkbox" id="different-address" />
-              <label htmlFor="different-address">¿Enviar a una dirección diferente?</label>
-            </div>
-            <div className="form-group">
-              <label>Notas del pedido (opcional):</label>
-              <textarea name="orderNotes" placeholder="Notas sobre tu pedido, por ejemplo, notas especiales para la entrega."></textarea>
+              <label>Email {renderError('email')}</label>
+              <input name="email" value={formData.email} onChange={handleChange} onBlur={handleBlur} />
             </div>
           </form>
         </div>
 
+        {/* 🛒 RESUMEN DEL PEDIDO */}
         <div className="order-summary">
           <h3>Tu pedido</h3>
           <div className="order-review">
-            <div className="order-item-header">
-                <span>PRODUCTO</span>
-                <span>SUBTOTAL</span>
-            </div>
             {cartItems.map(item => (
-              <div className="order-item" key={item.id}>
-                <div className="product-details">
-                  <button className="remove-button" onClick={() => removeFromCart(item.id)}>×</button>
-                  <img src={item.image} alt={item.name} className="product-image" />
-                  <span className="product-name">{item.name} × <strong>{item.quantity}</strong></span>
+              <div key={item.id} className="order-item">
+                <div className="item-info">
+                  <button onClick={() => removeFromCart(item.id)}>×</button>
+                  <img src={item.image} alt={item.name} />
+                  <span>{item.name} × {item.quantity}</span>
                 </div>
-                <span className="product-total">COP ${(item.price * item.quantity).toLocaleString()}</span>
+                <span>COP ${(item.price * item.quantity).toLocaleString()}</span>
               </div>
             ))}
-            <div className="order-totals">
-                <div className="total-row">
-                    <span>Subtotal</span>
-                    <span>COP ${subtotal.toLocaleString()}</span>
-                </div>
-                <div className="total-row">
-                    <span>Envío</span>
-                    <span>COP ${shipping.toLocaleString()}</span>
-                </div>
-                <div className="total-row grand-total">
-                    <span>Total</span>
-                    <span>COP ${total.toLocaleString()}</span>
-                </div>
+
+            <div className="order-total">
+              <p>Subtotal: <strong>COP ${subtotal.toLocaleString()}</strong></p>
+              <p>Envío: <strong>COP ${shipping.toLocaleString()}</strong></p>
+              <p>Total: <strong>COP ${total.toLocaleString()}</strong></p>
             </div>
+
+            <button className="pay-button" onClick={handlePay}>
+              Ir a pagar
+            </button>
           </div>
         </div>
       </div>

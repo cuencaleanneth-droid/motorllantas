@@ -22,6 +22,13 @@ import ShoppingCart from './pages/ShoppingCart';
 import Checkout from './pages/Checkout';
 import Footer from './components/Footer';
 import { useCart } from './context/CartContext';
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import AdminPage from "./pages/AdminPage";
+import AdminInventory from "./pages/AdminInventory";
+import SuccessPage from "./pages/SuccessPage"
+import FailurePage from "./pages/FailurePage";
+import PendingPage from "./pages/PendingPage";
 
 const Home = () => (
   <>
@@ -46,6 +53,13 @@ function App() {
   const { cartItems } = useCart();
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
+  const token = localStorage.getItem("token");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login"; // Redirige al login
+  };
+
   return (
     <Router>
       <div className="App">
@@ -53,13 +67,41 @@ function App() {
           <Link to="/">
             <img src={motorllantasLogo} className="App-logo" alt="logo" />
           </Link>
+
           <nav>
             <NavLink to="/" end>INICIO</NavLink>
             <NavLink to="/tires">LLANTAS</NavLink>
             <NavLink to="/offers">OFERTAS</NavLink>
             <NavLink to="/installation">INSTALACIÓN</NavLink>
             <NavLink to="/contact">CONTACTO</NavLink>
+
+            {!token && (
+              <>
+                <NavLink to="/register">REGISTRARSE</NavLink>
+                <NavLink to="/login">INICIAR SESIÓN</NavLink>
+              </>
+            )}
+
+            {token && (
+              <>
+                <NavLink to="/admin">ADMINISTRADOR</NavLink>
+                <NavLink to="/admin/inventory">GESTIONAR INVENTARIO</NavLink>
+                <button 
+                  onClick={handleLogout} 
+                  style={{
+                    marginLeft: "10px",
+                    background: "transparent",
+                    border: "none",
+                    color: "white",
+                    cursor: "pointer"
+                  }}
+                >
+                  CERRAR SESIÓN
+                </button>
+              </>
+            )}
           </nav>
+
           <div className="header-icons">
             <Link to="/cart" className="cart-icon">
               <img src={compraIcon} alt="compra" />
@@ -67,6 +109,7 @@ function App() {
             </Link>
           </div>
         </header>
+
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -76,8 +119,16 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/cart" element={<ShoppingCart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/success" element={<SuccessPage />} />
+            <Route path="/failure" element={<FailurePage />} />
+            <Route path="/pending" element={<PendingPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin/inventory" element={<AdminInventory />} />
           </Routes>
         </div>
+
         <Footer />
       </div>
     </Router>

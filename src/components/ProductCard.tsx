@@ -34,7 +34,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <img src={imageUrl} alt={title} className="product-image" />
       <div className="product-info">
         <p className="product-name">{title}</p>
-        <p className="product-grip">{grip}</p>
+        
         <div className="product-rating">
           {'★'.repeat(rating)}
           {'☆'.repeat(5 - rating)}

@@ -1,0 +1,50 @@
+.admin-inventory {
+  padding: 20px;
+  color: #222;
+}
+
+.inventory-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.inventory-form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.save-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background-color: #0056b3;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.inventory-table th,
+.inventory-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.inventory-table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.inventory-table img {
+  border-radius: 5px;
+}
