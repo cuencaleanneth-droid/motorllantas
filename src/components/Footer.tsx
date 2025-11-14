@@ -1,6 +1,6 @@
 import './Footer.css';
 import motorllantasLogo from '../assets/img/motorllantas.png';
-import { FaFacebook, FaInstagram, FaPhone, FaTiktok, FaWhatsapp } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaTiktok, FaWhatsapp } from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -11,16 +11,15 @@ const Footer = () => {
       <div className="footer-contact">
         <p>Contáctanos:</p>
         <div className="footer-social-icons">
-         <a href="#" target="_blank" rel="noopener noreferrer"><FaPhone/></a> 
-          <a href="#" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a> 
+          <a href="https://wa.link/7gfrd9" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a> 
         </div>
       </div>
       <div className="footer-social">
         <p>Síguenos en nuestras redes:</p>
         <div className="footer-social-icons">
-          <a href="#" target="_blank" rel="noopener noreferrer"><FaFacebook /></a> 
-          <a href="#" target="_blank" rel="noopener noreferrer"><FaInstagram /></a> 
-          <a href="#" target="_blank" rel="noopener noreferrer"><FaTiktok /></a> 
+          <a href="https://www.facebook.com/share/1DjvbkBZzx/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer"><FaFacebook /></a> 
+          <a href="https://www.instagram.com/motorllantas.com_?igsh=cnR6NHBvMTVhazE0" target="_blank" rel="noopener noreferrer"><FaInstagram /></a> 
+          <a href="https://www.tiktok.com/@motorllantas.com_?_r=1&_t=ZS-91P86eG2DA2" target="_blank" rel="noopener noreferrer"><FaTiktok /></a> 
         </div>
       </div>
     </footer>
