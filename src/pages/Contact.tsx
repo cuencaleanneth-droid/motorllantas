@@ -17,9 +17,13 @@ const Contact = () => {
         </div>
         <div className="social-icons">
           <a href="#"><FaFacebook /></a>
+          <a href="https://www.facebook.com/share/1DjvbkBZzx/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer"><FaFacebook /></a> 
           <a href="#"><FaInstagram /></a>
+          <a href="https://www.instagram.com/motorllantas.com_?igsh=cnR6NHBvMTVhazE0" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
           <a href="#"><FaYoutube /></a>
+          <a href="https://youtube.com/@motorllantas?si=edIXnMRim1QJJYq1" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>
           <a href="#"><FaWhatsapp /></a>
+          <a href="https://wa.link/7gfrd9" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a> 
         </div>
       </div>
       <div className="contact-form-container">
